@@ -5,7 +5,8 @@ CREATE TABLE filmes (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     autor VARCHAR(200) NOT NULL,
-    photo VARCHAR(500)
+    photo VARCHAR(500),
+    classificacaoIndicativa VARCHAR(10),
 );
 
 CREATE TABLE generos (
@@ -15,12 +16,12 @@ CREATE TABLE generos (
     descricao TEXT
 );
 
-INSERT INTO filmes (name, autor, photo) VALUES 
-('Hellboy', 'Mike Mignola', 'https://upload.wikimedia.org/wikipedia/pt/thumb/0/08/Hellboy_%282019%29.jpg/250px-Hellboy_%282019%29.jpg'),
-('Rambo', 'David Morrell', 'https://br.web.img3.acsta.net/medias/nmedia/18/97/40/18/20527154.jpg'),
-('Intocáveis', 'Philippe Pozzo di Borgo', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUkfQb28gNUmcIQFvyvbANLiPIVkunypxV8w&s'),
-('Vizinhos', 'Paulo Cursino', 'https://i.ytimg.com/vi/r5ZIRVz734Y/maxresdefault.jpg'),
-('A proposta', 'Anne Fletcher', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ClZe3lSEeEgIGPYNNO2DLOWHCLHKXsperg&s');
+INSERT INTO filmes (name, autor, photo, classificacaoIndicativa) VALUES 
+('Hellboy', 'Mike Mignola', 'https://upload.wikimedia.org/wikipedia/pt/thumb/0/08/Hellboy_%282019%29.jpg/250px-Hellboy_%282019%29.jpg', '18+'),
+('Rambo', 'David Morrell', 'https://br.web.img3.acsta.net/medias/nmedia/18/97/40/18/20527154.jpg', '16+'),
+('Intocáveis', 'Philippe Pozzo di Borgo', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUkfQb28gNUmcIQFvyvbANLiPIVkunypxV8w&s', '12+'),
+('Vizinhos', 'Paulo Cursino', 'https://i.ytimg.com/vi/r5ZIRVz734Y/maxresdefault.jpg', '14+'),
+('A proposta', 'Anne Fletcher', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ClZe3lSEeEgIGPYNNO2DLOWHCLHKXsperg&s', '10+');
 
 INSERT INTO generos (genero, subgenero, decricao) VALUES 
 ('Ação', 'Aventura', 'Filmes de ação são caracterizados por sequências de ação intensas e emocionantes.'),

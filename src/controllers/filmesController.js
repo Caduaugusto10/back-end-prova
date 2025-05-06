@@ -1,9 +1,9 @@
 const filmesModel = require('../models/filmesModel');
 
 const getAllFilmes = async (req, res) => {
-    const { nome, genero  } = req.query;
+    const { name, genero  } = req.query;
     try {
-        const filmes = await filmesModel.getAllFilmes(nome, genero);
+        const filmes = await filmesModel.getAllFilmes(name, genero);
         res.json(filmes);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar filmes' });
@@ -23,9 +23,9 @@ const getFilmeById = async (req, res) => {
 };
 
 const createFilme = async (req, res) => {
-    const { nome, genero, photo } = req.body;
+    const { name, genero, photo, classificacaoIndicativa } = req.body;
     try {
-        const novoFilme = await filmesModel.createFilme(nome, genero, photo);
+        const novoFilme = await filmesModel.createFilme(name, genero, photo, classificacaoIndicativa);
         res.status(201).json(novoFilme);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao criar filme' });
@@ -34,9 +34,9 @@ const createFilme = async (req, res) => {
 
 const updateFilme = async (req, res) => {
     const { id } = req.params;
-    const { nome, genero, photo } = req.body;
+    const { name, genero, photo, classificacaoIndicativa } = req.body;
     try {
-        const filmeAtualizado = await filmesModel.updateFilme(id, nome, genero, photo);
+        const filmeAtualizado = await filmesModel.updateFilme(id, name, genero, photo, classificacaoIndicativa);
         if (!filmeAtualizado) {
             return res.status(404).json({ error: 'Filme não encontrado' });
         }
