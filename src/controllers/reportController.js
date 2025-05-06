@@ -81,12 +81,12 @@ const exportGenerosPDF = async (req, res) => {
         doc.moveDown();
 
         // Cabeçalho
-        doc.fontSize(18).text("Id | Genero | SubGenero | Descrição", { underline: true });
+        doc.fontSize(18).text("Genero | SubGenero | Descrição", { underline: true });
         doc.moveDown(0.5);
 
         // Adiciona os dados dos generos
         generos.forEach((genero) => {
-            doc.text(`${genero.id} | ${genero.genero} | ${genero.subgenero} | ${genero.descricao}`);
+            doc.text(`${genero.genero} | ${genero.subgenero} | ${genero.descricao}`);
         });
 
         doc.end();

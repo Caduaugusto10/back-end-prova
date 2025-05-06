@@ -4,12 +4,12 @@ const getAllFilmes = async (classificacaoIndicativa) => {
     if (!classificacaoIndicativa) {
         const result = await pool.query(`
             SELECT * FROM filmes
-    `);
+        `);
         return result.rows;
     } else {
         const result = await pool.query(`
             SELECT * FROM filmes WHERE classificacaoIndicativa ILIKE $1
-            `, [`%${classificacaoIndicativa}%`]);
+        `, [`%${classificacaoIndicativa}%`]);
         return result.rows;
     }
 };
