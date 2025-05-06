@@ -3,7 +3,7 @@ const router = express.Router();
 const generosController = require('../controllers/generosController.js');
 const apiKeyMiddleware = require('../config/apiKey.js');
 
-router.use(apiKeyMiddleware);
+//router.use(apiKeyMiddleware);
 
 /**
  * @swagger

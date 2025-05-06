@@ -5,8 +5,8 @@ CREATE TABLE filmes (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     autor VARCHAR(200) NOT NULL,
-    photo VARCHAR(500),
-    classificacaoIndicativa VARCHAR(10),
+    photo TEXT,
+    classificacaoIndicativa VARCHAR(10)
 );
 
 CREATE TABLE generos (
@@ -23,7 +23,7 @@ INSERT INTO filmes (name, autor, photo, classificacaoIndicativa) VALUES
 ('Vizinhos', 'Paulo Cursino', 'https://i.ytimg.com/vi/r5ZIRVz734Y/maxresdefault.jpg', '14+'),
 ('A proposta', 'Anne Fletcher', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ClZe3lSEeEgIGPYNNO2DLOWHCLHKXsperg&s', '10+');
 
-INSERT INTO generos (genero, subgenero, decricao) VALUES 
+INSERT INTO generos (genero, subgenero, descricao) VALUES 
 ('Ação', 'Aventura', 'Filmes de ação são caracterizados por sequências de ação intensas e emocionantes.'),
 ('Terror', 'Suspense', 'Filmes de terror são projetados para provocar medo e tensão no público.'),
 ('Drama', 'Romance', 'Filmes de drama geralmente exploram temas emocionais e relacionamentos humanos.'),

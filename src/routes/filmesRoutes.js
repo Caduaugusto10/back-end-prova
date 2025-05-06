@@ -4,7 +4,7 @@ const filmesController = require('../controllers/filmesController.js');
 const apiKeyMiddleware = require('../config/apiKey.js');
 
 // Middleware para validação da API Key
-router.use(apiKeyMiddleware);
+//router.use(apiKeyMiddleware);
 
 /**
  * @swagger
