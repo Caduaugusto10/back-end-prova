@@ -10,13 +10,12 @@ const getAllGeneros = async (req, res) => {
 };
 
 const getGeneroById = async (req, res) => {
-    const { id } = req.params;
     try {
-        const genero = await generosModel.getGeneroById(id);
+        const genero = await generosModel.getGeneroById(req.params.id);
         if (!genero) {
-            return res.status(404).json({ error: 'Gênero não encontrado' });
+            return res.status(404).json({ error: 'Gênero não encontrado.' });
         }
-
+        res.json(genero);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar gênero' });
     }
@@ -47,15 +46,14 @@ const updateGenero = async (req, res) => {
 };
 
 const deleteGenero = async (req, res) => {
-    const { id } = req.params;
     try {
-        const result = await generosModel.deleteGenero(id);
-        if (!result.error) {
-            return res.status(404).json({ error: result.error });
+        const result = await generosModel.deleteGenero(req.params.id);
+        if (result.error) {
+            return res.status(404).json(result);
         }
         res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao deletar gênero' });
+        res.status(500).json({ error: 'Erro ao deletar Gênero' });
     }
 };
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const filmesController = require('../controllers/filmesController.js');
+const upload = require("../config/upload.js");
 const apiKeyMiddleware = require('../config/apiKey.js');
 
 // Middleware para validação da API Key
@@ -66,7 +67,7 @@ router.get('/:id', filmesController.getFilmeById);
  *       201:
  *         description: Filme criado
  */
-router.post('/', filmesController.createFilme);
+router.post('/', upload.single("photo"),filmesController.createFilme);
 
 /**
  * @swagger

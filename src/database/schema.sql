@@ -13,7 +13,8 @@ CREATE TABLE generos (
     id SERIAL PRIMARY KEY,
     genero VARCHAR(200) NOT NULL,
     subgenero VARCHAR(200),
-    descricao TEXT
+    descricao TEXT,
+    filmes_id INTEGER REFERENCES filmes(id) ON DELETE CASCADE
 );
 
 INSERT INTO filmes (name, autor, photo, classificacaoIndicativa) VALUES 

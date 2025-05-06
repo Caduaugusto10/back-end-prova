@@ -1,9 +1,9 @@
 const filmesModel = require('../models/filmesModel');
 
 const getAllFilmes = async (req, res) => {
-    const { name, genero  } = req.query;
     try {
-        const filmes = await filmesModel.getAllFilmes(name, genero);
+        const {classificacaoIndicativa} = req.query
+        const filmes = await filmesModel.getAllFilmes(classificacaoIndicativa);
         res.json(filmes);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao buscar filmes' });
@@ -11,21 +11,22 @@ const getAllFilmes = async (req, res) => {
 };
 
 const getFilmeById = async (req, res) => {
-    const { id } = req.params;
     try {
-        const filme = await filmesModel.getFilmeById(id);
+        const filme = await filmesModel.getFilmeById(req.params.id);
         if (!filme) {
-            return res.status(404).json({ error: 'Filme não encontrado' });
+            return res.status(404).json({ error: 'Filme não encontrado.' });
         }
+        res.json(filme);
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao buscar filme' });
+        res.status(500).json({ error: 'Erro ao buscar filme.' });
     }
-};
+}
 
 const createFilme = async (req, res) => {
-    const { name, genero, photo, classificacaoIndicativa } = req.body;
     try {
-        const novoFilme = await filmesModel.createFilme(name, genero, photo, classificacaoIndicativa);
+        const { name, autor, classificacaoIndicativa } = req.body;
+        const photo = req.file ? req.file.filename : null;
+        const novoFilme = await filmesModel.createFilme(name, autor, photo, classificacaoIndicativa);
         res.status(201).json(novoFilme);
     } catch (error) {
         res.status(500).json({ error: 'Erro ao criar filme' });
@@ -34,9 +35,9 @@ const createFilme = async (req, res) => {
 
 const updateFilme = async (req, res) => {
     const { id } = req.params;
-    const { name, genero, photo, classificacaoIndicativa } = req.body;
+    const { name, autor, photo, classificacaoIndicativa } = req.body;
     try {
-        const filmeAtualizado = await filmesModel.updateFilme(id, name, genero, photo, classificacaoIndicativa);
+        const filmeAtualizado = await filmesModel.updateFilme(id, name, autor, photo, classificacaoIndicativa);
         if (!filmeAtualizado) {
             return res.status(404).json({ error: 'Filme não encontrado' });
         }
@@ -47,14 +48,14 @@ const updateFilme = async (req, res) => {
 };
 
 const deleteFilme = async (req, res) => {
-    const { id } = req.params;
     try {
-        const filmeDeletado = await filmesModel.deleteFilme(id);
-        if (!filmeDeletado) {
-            return res.status(404).json({ error: 'Filme não encontrado' });
+        const result = await filmesModel.deleteFilme(req.params.id);
+        if (result.error) {
+            return res.status(404).json(result);
         }
-        res.status(204).send();
+        res.json(result);
     } catch (error) {
+        console.error("Erro ao deletar filme:", error);
         res.status(500).json({ error: 'Erro ao deletar filme' });
     }
 };
